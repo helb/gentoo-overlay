@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit eutils mercurial
+inherit mercurial
 
 DESCRIPTION="A lightweight volume manager."
 HOMEPAGE="http://tools.suckless.org/skvm"
@@ -14,8 +14,8 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 
-DEPEND="dev-util/mercurial"
-RDEPEND="${DEPEND} sys-apps/hal sys-apps/dbus"
+DEPEND="sys-apps/hal sys-apps/dbus"
+RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${PN}"
 
