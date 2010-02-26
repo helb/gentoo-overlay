@@ -1,6 +1,5 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id: bibble5-plugins-andrea-1.0a.ebuild 1561 2010-01-28 20:51:03Z casta $
 
 EAPI=2
 

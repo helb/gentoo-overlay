@@ -1,6 +1,5 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id: bibble5-plugins-brenda-1.0a.ebuild 1575 2010-02-12 22:25:14Z casta $
 
 EAPI=2
 
@@ -19,5 +18,3 @@ PLUGINS=(
 )
 
 bibble5-plugins-qa
-
-#bibble5-plugins-fetch "http://nexi.com/software/paid/"
