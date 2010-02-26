@@ -8,7 +8,7 @@ inherit bibble5-plugins
 
 DESCRIPTION="Curva is used to apply photoshop curves (.acv) to an image."
 HOMEPAGE="http://bibble.sadman.net/curva/"
-SRC_URI="http://bibble.sadman.net/files/curva_v0.2_b501_lnx.zip"
+SRC_URI="http://bibble.sadman.net/files/curva_v${PV}_b501_lnx.zip"
 
 KEYWORDS="~x86 ~amd64"
 IUSE=""
