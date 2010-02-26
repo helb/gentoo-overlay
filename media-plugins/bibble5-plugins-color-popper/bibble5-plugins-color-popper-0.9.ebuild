@@ -8,7 +8,7 @@ inherit bibble5-plugins
 
 DESCRIPTION="Bibble plugin which allows you to change the color levels without altering the exposure and contrast."
 HOMEPAGE="http://www.xs4all.nl/~mmzeeman/bibble/#color-popper"
-SRC_URI="http://www.xs4all.nl/~mmzeeman/bibble/Color-Popper-0-9.zip"
+SRC_URI="http://www.xs4all.nl/~mmzeeman/bibble/Color-Popper-${PV/./-}.zip"
 
 KEYWORDS="~x86 ~amd64"
 IUSE=""
