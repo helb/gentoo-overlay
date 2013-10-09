@@ -1,6 +1,5 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/mypaint/mypaint-1.1.0.ebuild,v 1.3 2013/04/26 17:54:55 hwoarang Exp $
 
 EAPI=4
 
@@ -10,7 +9,6 @@ inherit eutils fdo-mime gnome2-utils multilib scons-utils toolchain-funcs python
 
 DESCRIPTION="fast and easy graphics application for digital painters"
 HOMEPAGE="http://mypaint.intilinux.com/"
-#SRC_URI="http://download.gna.org/${PN}/${P}.tar.bz2"
 EGIT_REPO_URI="git://gitorious.org/mypaint/mypaint.git"
 EGIT_BRANCH="master"
 
@@ -46,15 +44,13 @@ src_prepare() {
 	# multilib support
 	sed -i -e "s:lib\/${PN}:$(get_libdir)\/${PN}:" \
 		SConstruct SConscript || die
-	# respect CXXFLAGS,CXX,LDFLAGS
-	# epatch "${FILESDIR}"/${PN}-1.1.0-gentoo.patch
-	# pkgconfig patch for json-c-0.11. 467322
-	#epatch "${FILESDIR}"/json-c.patch
+	# change "json" to "json-c":
 	sed -i -e "s/pkg_deps = .*json.*/pkg_deps = [\'json-c\']/" brushlib/SConscript || die "Sed failed!"
 }
 
 src_compile() {
-	#workaround scons bug with locales. Bug #352700
+	# workaround scons bug with locales. Bug #352700
+	# this is probably not needed anymore, but i am too lazy to test it
 	export LANG="en_US.UTF-8"
 	tc-export CXX
 	escons || die "scons failed"
