@@ -45,7 +45,9 @@ src_prepare() {
 	sed -i -e "s:lib\/${PN}:$(get_libdir)\/${PN}:" \
 		SConstruct SConscript || die
 	# change "json" to "json-c":
-	sed -i -e "s/pkg_deps = .*json.*/pkg_deps = [\'json-c\']/" brushlib/SConscript || die "Sed failed!"
+	sed -i -e "s/pkg_deps = .*json.*/pkg_deps = [\'json-c\']/" brushlib/SConscript || die "sed failed"
+	# fix mypaint bug #21183 - https://gna.org/bugs/index.php?21183
+	#epatch "${FILESDIR}"/palettes-dir-creation.patch || "epatch failed"
 }
 
 src_compile() {
