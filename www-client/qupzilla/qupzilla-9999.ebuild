@@ -17,7 +17,7 @@ else
 fi
 
 PLOCALES="cs_CZ de_DE el_GR es_ES es_VE fa_IR fr_FR hu_HU id_ID it_IT ja_JP
-ka_GE nl_NL pl_PL pt_BR pt_PT ro_RO ru_RU sk_SK sr_RS sv_SE uk_UA
+ka_GE nl_NL pl_PL pt_BR pt_PT ro_RO ru_RU sk_SK sv_SE uk_UA
 zh_CN zh_TW"
 
 inherit l10n multilib qt4-r2 ${VCS_ECLASS}
