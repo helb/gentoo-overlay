@@ -12,7 +12,7 @@ ESVN_REPO_URI="svn://svn.openttd.org/trunk"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="aplaymidi debug dedicated doc iconv icu lzo +openmedia +png +timidity daylength
+IUSE="aplaymidi debug dedicated doc iconv icu lzo +openmedia +png +timidity daylength condload
 	+truetype +zlib"
 REQUIRED_USE="
 	aplaymidi? ( !timidity )
@@ -58,7 +58,11 @@ src_prepare() {
 	if use daylength ; then
 		epatch "${FILESDIR}/true_day_length_r25493.patch"
 	fi
-	
+
+	if use condload ; then
+		epatch "${FILESDIR}/conditional_load_r25493.patch"
+	fi
+
 	# fix to help the automatic revision detection
 	echo "r${ESVN_WC_REVISION}	${ESVN_WC_REVISION}	0	r${ESVN_WC_REVISION}" \
 		> "${S}/.ottdrev"
