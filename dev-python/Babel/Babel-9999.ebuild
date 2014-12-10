@@ -9,7 +9,6 @@ inherit distutils-r1 git-r3
 
 DESCRIPTION="A collection of tools for internationalizing Python applications"
 HOMEPAGE="http://babel.pocoo.org/ https://github.com/mitsuhiko/babel"
-#SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 EGIT_REPO_URI="https://github.com/mitsuhiko/babel.git"
 
 LICENSE="BSD"
@@ -41,7 +40,7 @@ python_test() {
 
 python_compile_all() {
 	use doc && emake -C docs html
-    esetup.py import_cldr  || die "import_cldr failed"
+    	esetup.py import_cldr  || die "import_cldr failed"
 }
 
 python_install_all() {
