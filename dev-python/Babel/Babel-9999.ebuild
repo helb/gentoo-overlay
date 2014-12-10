@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python{2_7,3_3,3_4} pypy )
 inherit distutils-r1 git-r3
 
 DESCRIPTION="A collection of tools for internationalizing Python applications"
-HOMEPAGE="http://babel.edgewall.org/ http://pypi.python.org/pypi/Babel"
+HOMEPAGE="http://babel.pocoo.org/ https://github.com/mitsuhiko/babel"
 #SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 EGIT_REPO_URI="https://github.com/mitsuhiko/babel.git"
 
