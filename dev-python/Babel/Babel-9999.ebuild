@@ -40,7 +40,7 @@ python_test() {
 
 python_compile_all() {
 	use doc && emake -C docs html
-    	esetup.py import_cldr  || die "import_cldr failed"
+    	esetup.py import_cldr || die "import_cldr failed"
 }
 
 python_install_all() {
