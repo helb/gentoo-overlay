@@ -1,0 +1,181 @@
+Index: src/date.cpp
+===================================================================
+--- src/date.cpp	(revision 25493)
++++ src/date.cpp	(working copy)
+@@ -26,6 +26,7 @@
+ Date      _date;       ///< Current date in days (day counter)
+ DateFract _date_fract; ///< Fractional part of the day.
+ uint16 _tick_counter;  ///< Ever incrementing (and sometimes wrapping) tick counter for setting off various events
++uint8 _tick_skip_counter; ///< Counter for ticks, when only vehicles are moving and nothing else happens
+ 
+ /**
+  * Set the date.
+Index: src/date_func.h
+===================================================================
+--- src/date_func.h	(revision 25493)
++++ src/date_func.h	(working copy)
+@@ -18,7 +18,8 @@
+ extern Month     _cur_month;
+ extern Date      _date;
+ extern DateFract _date_fract;
+-extern uint16 _tick_counter;
++extern uint16    _tick_counter;
++extern uint8     _tick_skip_counter;
+ 
+ void SetDate(Date date, DateFract fract);
+ void ConvertDateToYMD(Date date, YearMonthDay *ymd);
+Index: src/lang/english.txt
+===================================================================
+--- src/lang/english.txt	(revision 25493)
++++ src/lang/english.txt	(working copy)
+@@ -1481,6 +1481,8 @@
+ STR_CONFIG_SETTING_ALLOW_SHARES_HELPTEXT                        :When enabled, allow buying and selling of company shares. Shares will only be available for companies reaching a certain age
+ STR_CONFIG_SETTING_FEEDER_PAYMENT_SHARE                         :Percentage of leg profit to pay in feeder systems: {STRING2}
+ STR_CONFIG_SETTING_FEEDER_PAYMENT_SHARE_HELPTEXT                :Percentage of income given to the intermediate legs in feeder systems, giving more control over the income
++STR_CONFIG_SETTING_DAY_LENGTH_FACTOR                            :Day length factor: {STRING2}
++STR_CONFIG_SETTING_DAY_LENGTH_FACTOR_HELPTEXT                   :Game pace is slowed by this factor
+ STR_CONFIG_SETTING_DRAG_SIGNALS_DENSITY                         :When dragging, place signals every: {STRING2}
+ STR_CONFIG_SETTING_DRAG_SIGNALS_DENSITY_HELPTEXT                :Set the distance at which signals will be built on a track up to the next obstacle (signal, junction), if signals are dragged
+ STR_CONFIG_SETTING_DRAG_SIGNALS_DENSITY_VALUE                   :{COMMA} tile{P 0 "" s}
+Index: src/misc.cpp
+===================================================================
+--- src/misc.cpp	(revision 25493)
++++ src/misc.cpp	(working copy)
+@@ -60,6 +60,7 @@
+ 	_pause_mode = PM_UNPAUSED;
+ 	_fast_forward = 0;
+ 	_tick_counter = 0;
++	_tick_skip_counter = 0;
+ 	_cur_tileloop_tile = 1;
+ 	_thd.redsq = INVALID_TILE;
+ 	if (reset_settings) MakeNewgameSettingsLive();
+Index: src/openttd.cpp
+===================================================================
+--- src/openttd.cpp	(revision 25493)
++++ src/openttd.cpp	(working copy)
+@@ -1335,13 +1335,25 @@
+ 		 *  for multiplayer compatibility */
+ 		Backup<CompanyByte> cur_company(_current_company, OWNER_NONE, FILE_LINE);
+ 
+-		AnimateAnimatedTiles();
+-		IncreaseDate();
+-		RunTileLoop();
+-		CallVehicleTicks();
+-		CallLandscapeTick();
+-		ClearStorageChanges(true);
++		_tick_skip_counter++;
+ 
++		if (_tick_skip_counter < _settings_game.economy.day_length_factor)
++		{
++			AnimateAnimatedTiles();
++			CallVehicleTicks();
++			ClearStorageChanges(true);
++		}
++		else
++		{
++			_tick_skip_counter = 0;
++			AnimateAnimatedTiles();
++			IncreaseDate();
++			RunTileLoop();
++			CallVehicleTicks();
++			CallLandscapeTick();
++			ClearStorageChanges(true);
++		}
++
+ 		AI::GameLoop();
+ 		Game::GameLoop();
+ 		UpdateLandscapingLimits();
+Index: src/saveload/misc_sl.cpp
+===================================================================
+--- src/saveload/misc_sl.cpp	(revision 25493)
++++ src/saveload/misc_sl.cpp	(working copy)
+@@ -73,6 +73,7 @@
+ 	SLEG_CONDVAR(_date,                   SLE_INT32,                  31, SL_MAX_VERSION),
+ 	    SLEG_VAR(_date_fract,             SLE_UINT16),
+ 	    SLEG_VAR(_tick_counter,           SLE_UINT16),
++	SLEG_CONDVAR(_tick_skip_counter,      SLE_UINT8,                 200, SL_MAX_VERSION),
+ 	SLE_CONDNULL(2, 0, 156), // _vehicle_id_ctr_day
+ 	SLEG_CONDVAR(_age_cargo_skip_counter, SLE_UINT8,                   0, 161),
+ 	SLE_CONDNULL(1, 0, 45),
+@@ -98,6 +99,7 @@
+ 	SLEG_CONDVAR(_load_check_data.current_date,  SLE_INT32,                  31, SL_MAX_VERSION),
+ 	    SLE_NULL(2),                       // _date_fract
+ 	    SLE_NULL(2),                       // _tick_counter
++	SLEG_CONDVAR(_tick_skip_counter,             SLE_UINT8,                 200, SL_MAX_VERSION),
+ 	SLE_CONDNULL(2, 0, 156),               // _vehicle_id_ctr_day
+ 	SLE_CONDNULL(1, 0, 161),               // _age_cargo_skip_counter
+ 	SLE_CONDNULL(1, 0, 45),
+Index: src/saveload/saveload.cpp
+===================================================================
+--- src/saveload/saveload.cpp	(revision 25493)
++++ src/saveload/saveload.cpp	(working copy)
+@@ -250,7 +250,7 @@
+  *  182   25296
+  *  183   25363
+  */
+-extern const uint16 SAVEGAME_VERSION = 186; ///< Current savegame version of OpenTTD.
++extern const uint16 SAVEGAME_VERSION = 200; ///< Current savegame version of OpenTTD.
+ 
+ SavegameType _savegame_type; ///< type of savegame we are loading
+ 
+Index: src/settings_gui.cpp
+===================================================================
+--- src/settings_gui.cpp	(revision 25493)
++++ src/settings_gui.cpp	(working copy)
+@@ -1588,6 +1588,7 @@
+ 	SettingEntry(&_settings_economy_towns_page, STR_CONFIG_SETTING_ECONOMY_TOWNS),
+ 	SettingEntry(&_settings_economy_industries_page, STR_CONFIG_SETTING_ECONOMY_INDUSTRIES),
+ 	SettingEntry("economy.inflation"),
++	SettingEntry("economy.day_length_factor"),
+ 	SettingEntry("difficulty.initial_interest"),
+ 	SettingEntry("difficulty.max_loan"),
+ 	SettingEntry("difficulty.subsidy_multiplier"),
+Index: src/settings_type.h
+===================================================================
+--- src/settings_type.h	(revision 25493)
++++ src/settings_type.h	(working copy)
+@@ -481,6 +481,7 @@
+ 	uint16 town_noise_population[3];         ///< population to base decision on noise evaluation (@see town_council_tolerance)
+ 	bool   allow_town_level_crossings;       ///< towns are allowed to build level crossings
+ 	bool   infrastructure_maintenance;       ///< enable monthly maintenance fee for owner infrastructure
++    uint8  day_length_factor;                ///< factor which the length of day is multiplied
+ };
+ 
+ struct LinkGraphSettings {
+Index: src/table/settings.ini
+===================================================================
+--- src/table/settings.ini	(revision 25493)
++++ src/table/settings.ini	(working copy)
+@@ -1234,6 +1234,19 @@
+ 
+ [SDT_VAR]
+ base     = GameSettings
++var      = economy.day_length_factor
++type     = SLE_UINT8
++from     = 200
++def      = 1
++min      = 1
++max      = 25
++str      = STR_CONFIG_SETTING_DAY_LENGTH_FACTOR
++strhelp  = STR_CONFIG_SETTING_DAY_LENGTH_FACTOR_HELPTEXT
++strval   = STR_JUST_COMMA
++cat      = SC_BASIC
++
++[SDT_VAR]
++base     = GameSettings
+ var      = construction.raw_industry_construction
+ type     = SLE_UINT8
+ guiflags = SGF_MULTISTRING
+Index: src/vehicle.cpp
+===================================================================
+--- src/vehicle.cpp	(revision 25493)
++++ src/vehicle.cpp	(working copy)
+@@ -860,7 +860,7 @@
+ {
+ 	_vehicles_to_autoreplace.Clear();
+ 
+-	RunVehicleDayProc();
++	if (_tick_skip_counter == 0) RunVehicleDayProc();
+ 
+ 	Station *st;
+ 	FOR_ALL_STATIONS(st) LoadUnloadStation(st);
