@@ -3,7 +3,7 @@
 
 EAPI="5"
 
-inherit flag-o-matic eutils
+inherit eutils
 
 DESCRIPTION="A free ASCII-Text Screen Editor for UNIX"
 HOMEPAGE="http://sourceforge.net/projects/joe-editor/"
