@@ -79,9 +79,9 @@ pkg_postinst() {
     gnome2_icon_cache_update
 
     elog "optional dependencies:"
-    elog "  dev-python/libgnome-python  Gnome integration"
-    elog "  media-libs/mutagen          metedata support"
-    elog "  x11-libs/vte:0[python]      terminal tab support"
+    elog "  dev-python/libgnome-python  - Gnome integration"
+    elog "  media-libs/mutagen          - metadata support"
+    elog "  x11-libs/vte:0[python]      - terminal tab support"
     elog ""
     elog "plugins:"
     elog "  https://github.com/MeanEYE/Sunflower#plugins"
