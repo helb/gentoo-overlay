@@ -78,11 +78,13 @@ pkg_postinst() {
     fdo-mime_desktop_database_update
     gnome2_icon_cache_update
 
-    # TODO: better description
     elog "optional dependencies:"
-    elog "  dev-python/libgnome-python"
-    elog "  media-libs/mutagen"
-    elog "  x11-libs/vte:0[python] (terminal support)"
+    elog "  dev-python/libgnome-python  Gnome integration"
+    elog "  media-libs/mutagen          metedata support"
+    elog "  x11-libs/vte:0[python]      terminal tab support"
+    elog ""
+    elog "plugins:"
+    elog "  https://github.com/MeanEYE/Sunflower#plugins"
 }
 
 pkg_postrm() {
