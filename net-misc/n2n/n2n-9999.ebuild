@@ -29,8 +29,8 @@ pkg_preinst() {
 	keepdir /var/log/n2n
 	fowners n2n:n2n /var/log/n2n
 
-	newconfd "${FILESDIR}/supernode.confd" supernode
-	newinitd "${FILESDIR}/supernode.initd" supernode
-	newconfd "${FILESDIR}/edge.confd" edge
-	newinitd "${FILESDIR}/edge.initd" edge
+	newconfd "${FILESDIR}/supernode.confd" n2n-supernode
+	newinitd "${FILESDIR}/supernode.initd" n2n-supernode
+	newconfd "${FILESDIR}/edge.confd" n2n-edge
+	newinitd "${FILESDIR}/edge.initd" n2n-edge
 }
