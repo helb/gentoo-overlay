@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit git-r3 cmake-utils
+inherit git-r3 cmake-utils user
 
 DESCRIPTION="Layer 2 P2P VPN. Meyerd's development fork."
 HOMEPAGE="http://www.ntop.org/products/n2n/ https://github.com/meyerd/n2n"
