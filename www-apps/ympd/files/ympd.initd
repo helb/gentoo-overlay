@@ -1,0 +1,29 @@
+#!/sbin/runscript
+
+NAME="ympd"
+PIDFILE="/var/run/${NAME}.pid"
+BINARY="/usr/bin/${NAME}"
+OPTS="-p ${MPD_PORT} -w ${WEB_PORT} -h ${MPD_HOST}"
+
+depend() {
+    need mpd
+}
+
+
+start() {
+    ebegin "Starting ${NAME}"
+
+    start-stop-daemon -m --pidfile "${PIDFILE}" -b \
+    -u "${USER}" --start --exec "${BINARY}" -- "${OPTS}"
+
+    eend $?
+}
+
+stop() {
+    ebegin "Stopping ${NAME}"
+
+    start-stop-daemon --stop --exec "${BINARY}" \
+    --pidfile "${PIDFILE}"
+
+    eend $?
+}
