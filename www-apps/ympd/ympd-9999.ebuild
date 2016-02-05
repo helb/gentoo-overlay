@@ -15,7 +15,7 @@ KEYWORDS="~x86 ~amd64"
 IUSE="static openssl repo-nofre"
 
 if use repo-nofre; then
-	EGIT_REPO_URI="https://github.com/nofre/ympd.git"
+    EGIT_REPO_URI="https://github.com/nofre/ympd.git"
 else
     EGIT_REPO_URI="https://github.com/notandy/ympd.git"
 fi
@@ -24,14 +24,14 @@ DEPEND=">=net-libs/libwebsockets-9999[openssl?]"
 RDEPEND="${DEPEND}"
 
 src_configure() {
-	local mycmakeargs=(
-		$(cmake-utils_use_with static STATIC_WEBSOCKETS)
-	)
-	cmake-utils_src_configure
+    local mycmakeargs=(
+        $(cmake-utils_use_with static STATIC_WEBSOCKETS)
+    )
+    cmake-utils_src_configure
 }
 
 src_install() {
-	cmake-utils_src_install
+    cmake-utils_src_install
     newconfd "${FILESDIR}"/${PN}.confd ${PN}
     newinitd "${FILESDIR}"/${PN}.initd ${PN}
 }
