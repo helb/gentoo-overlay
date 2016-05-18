@@ -15,7 +15,10 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="encryption"
 
-RDEPEND="encryption? ( dev-python/pycrypto[${PYTHON_USEDEP}] )"
+RDEPEND="
+		 ${PYTHON_DEPS}
+		 encryption? ( dev-python/pycrypto[${PYTHON_USEDEP}] )
+		"
 
 DEPEND="${RDEPEND}"
 
