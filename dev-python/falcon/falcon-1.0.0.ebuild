@@ -11,7 +11,7 @@ PYTHON_COMPAT=( python{2_7,3_3,3_4} pypy pypy2_0 )
 
 inherit distutils-r1
 
-DESCRIPTION="A supersonic micro-framework for building cloud APIs"
+DESCRIPTION="Low-level, high-performance Python framework for building HTTP APIs, app backends, and higher-level frameworks"
 HOMEPAGE="http://falconframework.org/ https://pypi.python.org/pypi/falcon"
 MY_P="${PV/_beta/b}"
 SRC_URI="https://github.com/racker/${PN}/archive/${MY_P}.tar.gz -> ${P}.tar.gz"
@@ -19,7 +19,7 @@ SRC_URI="https://github.com/racker/${PN}/archive/${MY_P}.tar.gz -> ${P}.tar.gz"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+cython test"
+IUSE="cython test"
 
 RDEPEND="dev-python/six[${PYTHON_USEDEP}]
 	dev-python/mimeparse[${PYTHON_USEDEP}]
@@ -39,13 +39,3 @@ python_test() {
 	nosetests || die "Testing failed with ${EPYTHON}"
 }
 
-src_prepare() {
-	if ! use cython; then
-		sed -i -e 's/if with_cython:/if False:/' setup.py \
-			|| die 'sed failed.'
-	fi
-
-	# fix tests installation : potential file collision
-	sed -e 's@^where = tests@where = falcon/tests@g' -i setup.cfg || die
-	mv tests falcon/
-}
