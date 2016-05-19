@@ -31,6 +31,9 @@ RDEPEND="
 	x11-libs/libXdmcp
 	x11-libs/libXext
 	x11-libs/libXrender
+	dev-qt/qtwebkit:5[webchannel]
+	dev-qt/designer:5
+	dev-qt/qtsvg:5
 	"
 DEPEND="sys-apps/debianutils"
 BASEDIR="opt/AfterShot3(64-bit)"
