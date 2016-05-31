@@ -12,7 +12,7 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="bash zsh"
-REQUIRED_USE="^^ ( bash zsh )"
+REQUIRED_USE="?? ( bash zsh )"
 
 DEPEND="zsh? ( app-shells/zsh media-gfx/imagemagick )
 		bash? ( app-shells/bash media-gfx/imagemagick )"
