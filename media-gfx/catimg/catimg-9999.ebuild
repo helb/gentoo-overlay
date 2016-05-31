@@ -26,6 +26,9 @@ src_install(){
 	fi
 	
 	if use zsh || use bash ; then
+		insinto /usr/share/${PN}
+		doins ${S}/catimg-ext-colors.png
+		sed -i 's/COLOR_FILE=$(dirname "$0")/COLOR_FILE=\/usr\/share\/catimg/' ${S}/${PN}
 		exeinto /usr/bin
 		newexe ${S}/${PN} ${PN}.sh
 	fi
