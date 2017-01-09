@@ -1,0 +1,68 @@
+From 8eec2e6d22ee969784db88f7d1079ecdfb95eee9 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ji=C5=99=C3=AD=20Helebrant?= <jiri.helebrant@nic.cz>
+Date: Mon, 9 Jan 2017 17:06:11 +0100
+Subject: [PATCH] mpv support
+
+---
+ dir2ogg | 23 ++++++++++++-----------
+ 1 file changed, 12 insertions(+), 11 deletions(-)
+
+diff --git a/dir2ogg b/dir2ogg
+index d5abc95..96fadd8 100755
+--- a/dir2ogg
++++ b/dir2ogg
+@@ -104,13 +104,13 @@ def read_opts():
+     parser.add_option('-Q', '--quiet', action='store_true', help='do not display progress report.')
+ 
+     # Setup decoders
+-    commands = {'mp3': ('mpg123', 'mpg321', 'lame',  'mplayer'),
+-        'wma': ('mplayer',),
+-        'm4a': ('faad', 'mplayer'),
+-        'flac': ('flac', 'ogg123', 'mplayer'),
+-        'ape': ('mac', 'mplayer'),
+-        'wv':  ('wvunpack', 'mplayer'),
+-        'mpc': ('mpcdec', 'mplayer'),
++    commands = {'mp3': ('mpg123', 'mpg321', 'lame', 'mplayer', 'mpv'),
++        'wma': ('mplayer', 'mpv'),
++        'm4a': ('faad', 'mplayer', 'mpv'),
++        'flac': ('flac', 'ogg123', 'mplayer', 'mpv'),
++        'ape': ('mac', 'mplayer', 'mpv'),
++        'wv':  ('wvunpack', 'mplayer', 'mpv'),
++        'mpc': ('mpcdec', 'mplayer', 'mpv'),
+         }
+ 
+     for ext, dec in commands.items():
+@@ -365,9 +365,9 @@ class Convert(Id3TagHandler):
+         info("(smartmp3) Assumed vorbis quality: %.02f" % self.conf.quality)
+ 
+     def decode(self):
+-        # Used for mplayer
++        # Used for mplayer & mpv
+         tempwav = 'dir2ogg-%s-temp.wav' % os.getpid()
+-        if self.decoder not in ('mplayer',) and not self.conf.no_pipe and not self.conf.preserve_wav:
++        if self.decoder not in ('mplayer', 'mpv') and not self.conf.no_pipe and not self.conf.preserve_wav:
+             outfile, outfile1 = '-', '/dev/stdout'
+             use_pipe = 1
+         else:
+@@ -382,6 +382,7 @@ class Convert(Id3TagHandler):
+                    'mac':     ['mac', self.song, outfile, '-d'],
+                    'mpcdec':  ['mpcdec', self.song, outfile],
+                    'mplayer': ['mplayer', '-really-quiet', '-vo', 'null', '-vc' ,'dummy', '-af', 'resample=44100', '-ao', 'pcm:file=' + tempwav, self.song],
++                   'mpv':     ['mpv', '-really-quiet', '-vo', 'null', '-vc' ,'dummy', '-af', 'resample=44100', '-ao', 'pcm:file=' + tempwav, self.song],
+                    'wvunpack': ['wvunpack', '-q', self.song, '-o', outfile],
+                    'alac-decoder': ['alac-decoder',  self.song]}
+         if use_pipe:
+@@ -392,8 +393,8 @@ class Convert(Id3TagHandler):
+             decoder['mpg123'].remove('-s')
+             decoder['lame'].remove('--quiet')
+             retcode = call(decoder[self.decoder])
+-            if self.decoder == 'mplayer':
+-                # Move the file for mplayer (which uses tempwav), so it works
++            if self.decoder in ('mplayer', 'mpv'):
++                # Move the file for mplayer/mpv (which uses tempwav), so it works
+                 # for --preserve-wav.
+                 os.rename(tempwav, self.songwav)
+             if retcode != 0:
+-- 
+2.11.0
+
