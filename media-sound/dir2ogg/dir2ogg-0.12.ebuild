@@ -49,6 +49,7 @@ DEPEND=""
 src_prepare() {
 	epatch "${FILESDIR}/0001-use-python2-binary.patch"
 	epatch "${FILESDIR}/0002-mpv-support.patch"
+	epatch "${FILESDIR}/0003-add-mpv-to-README-and-manpage.patch"
 	eapply_user
 }
 
