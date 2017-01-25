@@ -6,12 +6,9 @@ EAPI=6
 
 inherit eutils flag-o-matic systemd user
 
-COMMIT="69fd6252b2aab39faaa041d6ef903ca2131097ff"
-MY_PV=${PV/_/-}
 DESCRIPTION="A caching full DNS resolver implementation written in C and LuaJIT"
 HOMEPAGE="https://www.knot-resolver.cz/"
-SRC_URI="https://gitlab.labs.nic.cz/knot/resolver/repository/archive.tar.bz2?ref=v${MY_PV} -> ${P}.tbz2"
-S="${WORKDIR}/resolver-v${MY_PV}-${COMMIT}"
+SRC_URI="https://secure.nic.cz/files/${PN}/${P}.tar.xz"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
