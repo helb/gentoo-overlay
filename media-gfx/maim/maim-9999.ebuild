@@ -21,5 +21,5 @@ DEPEND="
 	x11-libs/libX11
 	x11-libs/libXrandr
 	x11-libs/libXfixes
-	x11-misc/slop"
+	>=x11-misc/slop-5.3.37"
 RDEPEND="${DEPEND}"
