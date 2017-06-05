@@ -21,6 +21,7 @@ DEPEND="
 		x11-libs/cairo
         x11-libs/pango[X]
 		x11-libs/startup-notification
+		app-text/pandoc
 		"
 
 RDEPEND="${DEPEND}"
