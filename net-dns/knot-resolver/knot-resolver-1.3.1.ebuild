@@ -17,6 +17,7 @@ IUSE="go hardened memcached redis systemd test"
 RDEPEND="
 	>=net-dns/knot-2.3.1
 	>=dev-libs/libuv-1.7.0
+	dev-libs/jansson
 	dev-lang/luajit:2
 	dev-lua/luasocket
 	dev-lua/luasec
