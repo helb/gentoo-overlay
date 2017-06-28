@@ -4,9 +4,9 @@
 
 EAPI=5
 
-#PYTHON_COMPAT=( python{3_5,3_6} )
+PYTHON_COMPAT=( python{3_5,3_6} )
 #inherit distutils-r1 git-r3
-inherit git-r3
+inherit git-r3 python-r1
 
 DESCRIPTION="A modern, hackable, featureful, OpenGL-based terminal emulator."
 HOMEPAGE="https://github.com/kovidgoyal/kitty"
@@ -29,6 +29,7 @@ DEPEND="${DEPEND}
 	"
 
 src_compile() {
+	python_setup;
 	python setup.py linux-package;
 }
 
