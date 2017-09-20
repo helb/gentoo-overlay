@@ -11,7 +11,7 @@ MY_PN="Sunflower"
 DESCRIPTION="Small and highly customizable twin-panel file manager with plugin-support"
 HOMEPAGE="http://sunflower-fm.org/"
 
-EGIT_REPO_URI="git://github.com/MeanEYE/Sunflower.git"
+EGIT_REPO_URI="https://github.com/MeanEYE/Sunflower.git"
 
 LICENSE="GPL-3"
 SLOT="0"
