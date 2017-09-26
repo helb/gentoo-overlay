@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit eutils flag-o-matic systemd user
+inherit eutils cmake-utils flag-o-matic systemd user
 
 DESCRIPTION="A caching full DNS resolver implementation written in C and LuaJIT"
 HOMEPAGE="https://www.knot-resolver.cz/"
