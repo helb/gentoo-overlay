@@ -36,7 +36,10 @@ pkg_setup() {
 }
 
 src_prepare() {
-	sed -i 's/ -D_FORTIFY_SOURCE=2//g' ./config.mk \
+	sed -i 's~ -D_FORTIFY_SOURCE=2~~g' ./config.mk \
+		|| die "sed fix failed. Uh-oh..."
+
+	sed -i 's~^LIBDIR.*~LIBDIR ?= $(PREFIX)/'$(get_libdir)~'' ./config.mk \
 		|| die "sed fix failed. Uh-oh..."
 
 	eapply_user
@@ -76,21 +79,7 @@ src_install() {
 	systemd_dounit "${FILESDIR}"/kresd-tls.socket
 	systemd_newtmpfilesd "${FILESDIR}"/kresd.tmpfilesd kresd.conf
 
-	insinto /etc/kresd
-	doins etc/config.personal
-	doins etc/config.cluster
-	doins etc/config.isp
-	doins etc/config.splitview
 	dosym /etc/kresd/config.personal /etc/kresd/config
-	fperms 0640 /etc/kresd/config.personal
-	fperms 0640 /etc/kresd/config.cluster
-	fperms 0640 /etc/kresd/config.isp
-	fperms 0640 /etc/kresd/config.splitview
-
-	dodoc README.md
-	dodoc AUTHORS
-	dodoc COPYING
-	dodoc NEWS
 
 	insinto /etc/logrotate.d
 	newins "${FILESDIR}"/kresd.logrotate kresd
