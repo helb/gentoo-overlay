@@ -26,6 +26,7 @@ DEPEND="${DEPEND}
 	media-libs/fontconfig
 	X? ( x11-apps/xrdb )
 	X? ( x11-misc/xsel )
+	media-libs/harfbuzz
 	"
 
 src_compile() {
