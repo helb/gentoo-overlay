@@ -6,14 +6,12 @@ EAPI=6
 PYTHON_COMPAT=( python3_{5,6} )
 PYTHON_REQ_USE="sqlite,xml"
 
-inherit distutils-r1 git-r3
+inherit distutils-r1 gnome2-utils xdg-utils
 
-MY_PV="${PV//_/-}"
 DESCRIPTION="Jabber client written in PyGTK"
 HOMEPAGE="https://www.gajim.org/"
 KEYWORDS="~amd64"
-EGIT_REPO_URI="https://dev.gajim.org/gajim/gajim.git"
-EGIT_COMMIT="${PN}-${MY_PV}"
+SRC_URI="https://gajim.org/downloads/1.0/gajim-${PV}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -71,3 +69,13 @@ RDEPEND="${COMMON_DEPEND}
 	xhtml? ( dev-python/docutils[${PYTHON_USEDEP}] )"
 
 RESTRICT="test"
+
+pkg_postinst() {
+	xdg_desktop_database_update
+	gnome2_icon_cache_update
+}
+
+pkg_postrm() {
+	xdg_desktop_database_update
+	gnome2_icon_cache_update
+}
