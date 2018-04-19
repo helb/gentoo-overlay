@@ -10,7 +10,7 @@ SRC_URI="https://github.com/atom/atom/releases/download/v${MY_PV}/atom-amd64.tar
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 IUSE=""
 
 DEPEND=""
