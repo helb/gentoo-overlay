@@ -8,7 +8,7 @@
 
 EAPI=5
 # needs 2to3 for urlparse
-PYTHON_COMPAT=( python2_7 python3_{4,5} )
+PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
 
 DESCRIPTION="Python m3u8 Parser for HTTP Live Streaming (HLS) Transmissions"
 HOMEPAGE="https://pypi.python.org/pypi/m3u8 https://github.com/globocom/m3u8"
