@@ -27,6 +27,7 @@ DEPEND="${DEPEND}
 	X? ( x11-apps/xrdb )
 	X? ( x11-misc/xsel )
 	media-libs/harfbuzz
+	>=dev-python/sphinx-1.7
 	"
 
 src_compile() {
