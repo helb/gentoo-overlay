@@ -9,8 +9,8 @@ HOMEPAGE="https://atom.io/"
 SRC_URI="https://github.com/atom/atom/releases/download/v${MY_PV}/atom-amd64.tar.gz -> atom-${PV}.tar.gz"
 
 LICENSE="MIT"
-SLOT="0"
-KEYWORDS=""
+SLOT="beta"
+KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND=""
