@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+<repositories xmlns="" version="1.0">
+  <repo quality="experimental" status="unofficial">
+    <name><![CDATA[helb]]></name>
+    <description lang="en"><![CDATA[helb]]></description>
+    <homepage>http://github.com/helb/gentoo-overlay</homepage>
+    <owner type="person">
+      <email>helb@helb.cz</email>
+      <name><![CDATA[helb]]></name>
+    </owner>
+    <source type="git">git://github.com/helb/gentoo-overlay.git</source>
+    <feed>http://github.com/helb/gentoo-overlay/commits/master.atom</feed>
+  </repo>
+</repositories>
