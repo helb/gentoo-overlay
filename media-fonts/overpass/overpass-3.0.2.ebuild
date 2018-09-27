@@ -8,7 +8,7 @@ inherit font
 
 DESCRIPTION="An open source font family inspired by Highway Gothic."
 HOMEPAGE="http://overpassfont.org"
-SRC_URI="https://github.com/RedHatBrand/Overpass/releases/download/${PV}/overpass-desktop-fonts.zip"
+SRC_URI="https://github.com/RedHatBrand/Overpass/releases/download/${PV}/overpass-desktop-fonts.zip -> ${P}.zip"
 LICENSE="OFL-1.1"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
