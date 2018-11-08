@@ -36,9 +36,10 @@ RDEPEND="${COMMON_DEPEND}
 	dev-python/pillow[${PYTHON_USEDEP}]
 	dev-python/pycurl[${PYTHON_USEDEP}]
 	dev-python/qrcode[${PYTHON_USEDEP}]
-	dev-python/pyasn1[${PYTHON_USEDEP}]
 	>=dev-python/pyopenssl-0.14[${PYTHON_USEDEP}]
 	>=dev-python/python-nbxmpp-0.6.3[${PYTHON_USEDEP}]
+	>=dev-python/cssutils-1.0.2[${PYTHON_USEDEP}]
+	dev-python/keyring[${PYTHON_USEDEP}]
 	crypt? (
 		app-crypt/gnupg
 		dev-python/python-gnupg[${PYTHON_USEDEP}]
@@ -47,7 +48,6 @@ RDEPEND="${COMMON_DEPEND}
 		dev-python/dbus-python[${PYTHON_USEDEP}]
 		virtual/notification-daemon
 		dev-libs/dbus-glib
-		zeroconf? ( net-dns/avahi[dbus,gtk,python,${PYTHON_USEDEP}] )
 		)
 	gnome? (
 		dev-python/libgnome-python[${PYTHON_USEDEP}]
