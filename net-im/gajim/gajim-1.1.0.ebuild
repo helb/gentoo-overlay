@@ -36,6 +36,7 @@ RDEPEND="${COMMON_DEPEND}
 	dev-python/pillow[${PYTHON_USEDEP}]
 	dev-python/pycurl[${PYTHON_USEDEP}]
 	dev-python/qrcode[${PYTHON_USEDEP}]
+	dev-python/precis-i18n[${PYTHON_USEDEP}]
 	>=dev-python/pyopenssl-0.14[${PYTHON_USEDEP}]
 	>=dev-python/python-nbxmpp-0.6.3[${PYTHON_USEDEP}]
 	>=dev-python/cssutils-1.0.2[${PYTHON_USEDEP}]
