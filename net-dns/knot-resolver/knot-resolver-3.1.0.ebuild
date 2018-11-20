@@ -15,7 +15,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="go hardened memcached redis systemd test"
 
 RDEPEND="
-	>=net-dns/knot-2.7.1
+	>=net-dns/knot-2.7.2
 	>=dev-libs/libuv-1.7.0
 	dev-libs/jansson
 	dev-lang/luajit:2
