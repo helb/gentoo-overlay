@@ -8,7 +8,7 @@ RefuseManualStart=true
 Type=notify
 WorkingDirectory=/run/kresd
 ExecStart=/usr/sbin/kresd -c /etc/kresd/config
-User=kresd
+User=knot-resolver
 Restart=on-failure
 
 [Install]

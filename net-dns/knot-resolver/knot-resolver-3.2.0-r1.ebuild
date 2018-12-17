@@ -31,8 +31,8 @@ DEPEND="${RDEPEND}
 	test? ( dev-util/cmocka )"
 
 pkg_setup() {
-	enewgroup kresd
-	enewuser kresd -1 -1 /etc/kresd kresd
+	enewgroup knot-resolver
+	enewuser knot-resolver -1 -1 /etc/kresd knot-resolver
 }
 
 src_prepare() {
@@ -83,4 +83,7 @@ src_install() {
 
 	insinto /etc/logrotate.d
 	newins "${FILESDIR}"/kresd.logrotate kresd
+
+	#dodir /var/cache/kresd
+	#fowners knot-resolver:knot-resolver /var/cache/kresd
 }
