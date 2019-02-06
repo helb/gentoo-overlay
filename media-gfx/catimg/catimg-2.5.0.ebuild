@@ -7,7 +7,7 @@ inherit cmake-utils
 
 DESCRIPTION="Renders images in the terminal."
 HOMEPAGE="https://github.com/posva/catimg"
-SRC_URI="${HOMEPAGE}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="${HOMEPAGE}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
