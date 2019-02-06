@@ -23,5 +23,5 @@ src_install() {
 	doins -r opt
 	fperms +x /opt/hopper-v4/bin/Hopper
 	exeinto /usr/bin
-	newexe opt/hopper-v4/bin/hopper-launcher.sh Hopper
+	newexe opt/hopper-v4/bin/Hopper Hopper
 }
