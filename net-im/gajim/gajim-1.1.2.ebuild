@@ -38,7 +38,7 @@ RDEPEND="${COMMON_DEPEND}
 	dev-python/qrcode[${PYTHON_USEDEP}]
 	dev-python/precis-i18n[${PYTHON_USEDEP}]
 	>=dev-python/pyopenssl-0.14[${PYTHON_USEDEP}]
-	>=dev-python/python-nbxmpp-0.6.3[${PYTHON_USEDEP}]
+	>=dev-python/python-nbxmpp-0.6.9[${PYTHON_USEDEP}]
 	>=dev-python/cssutils-1.0.2[${PYTHON_USEDEP}]
 	dev-python/keyring[${PYTHON_USEDEP}]
 	crypt? (
