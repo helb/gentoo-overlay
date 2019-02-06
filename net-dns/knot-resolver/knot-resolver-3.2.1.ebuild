@@ -84,6 +84,6 @@ src_install() {
 	insinto /etc/logrotate.d
 	newins "${FILESDIR}"/kresd.logrotate kresd
 
-	#dodir /var/cache/kresd
-	#fowners knot-resolver:knot-resolver /var/cache/kresd
+	keepdir /var/cache/kresd
+	fowners knot-resolver:knot-resolver /var/cache/kresd
 }
