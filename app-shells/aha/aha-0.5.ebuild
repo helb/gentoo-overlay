@@ -6,7 +6,7 @@ EAPI=5
 
 DESCRIPTION="Ansi HTML Adapter - convert colored terminal output to HTML"
 HOMEPAGE="https://github.com/theZiz/aha"
-SRC_URI="https://github.com/theZiz/aha/archive/${PV}.tar.gz"
+SRC_URI="https://github.com/theZiz/aha/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="LGPL"
 SLOT="0"
