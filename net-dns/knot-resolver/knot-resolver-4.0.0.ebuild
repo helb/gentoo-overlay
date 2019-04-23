@@ -4,14 +4,14 @@
 
 EAPI=6
 
-inherit eutils meson ninja-utils systemd user
+inherit eutils meson systemd user
 
 DESCRIPTION="A caching full DNS resolver implementation written in C and LuaJIT"
 HOMEPAGE="https://www.knot-resolver.cz/"
 SRC_URI="https://secure.nic.cz/files/${PN}/${P}.tar.xz"
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 IUSE="go hardened memcached redis systemd test"
 
 RDEPEND="
@@ -37,4 +37,23 @@ DEPEND="${RDEPEND}
 pkg_setup() {
 	enewgroup knot-resolver
 	enewuser knot-resolver -1 -1 /etc/kresd knot-resolver
+}
+
+src_install() {
+	meson_src_install
+
+	mv ${D}/usr/share/doc/${PN} ${D}/usr/share/doc/${PF}
+
+	newconfd "${FILESDIR}"/kresd.confd kresd
+	newinitd "${FILESDIR}"/kresd.initd kresd
+	systemd_dounit "${FILESDIR}"/kresd.service
+	systemd_dounit "${FILESDIR}"/kresd.socket
+	systemd_dounit "${FILESDIR}"/kresd-control.socket
+	systemd_dounit "${FILESDIR}"/kresd-tls.socket
+	systemd_newtmpfilesd "${FILESDIR}"/kresd.tmpfilesd kresd.conf
+
+	insinto /etc/logrotate.d
+	newins "${FILESDIR}"/kresd.logrotate kresd
+
+	fowners knot-resolver:knot-resolver /etc/${PN}/
 }
