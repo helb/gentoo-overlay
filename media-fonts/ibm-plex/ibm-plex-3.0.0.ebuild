@@ -18,8 +18,14 @@ S="${WORKDIR}"
 DEPEND="app-arch/unzip"
 RDEPEND=""
 
-FONT_S="OpenType/IBM-Plex-Mono
+FONT_S="OpenType/IBM-Plex-Arabic
+		OpenType/IBM-Plex-Mono
 		OpenType/IBM-Plex-Sans
 		OpenType/IBM-Plex-Sans-Condensed
+		OpenType/IBM-Plex-Sans-Devanagari
+		OpenType/IBM-Plex-Sans-Hebrew
+		OpenType/IBM-Plex-Sans-Thai
+		OpenType/IBM-Plex-Sans-Thai-Looped
 		OpenType/IBM-Plex-Serif"
+
 FONT_SUFFIX="otf"
