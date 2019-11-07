@@ -13,7 +13,7 @@ LICENSE="OFL-1.1"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
-S="${WORKDIR}/Inter (OTF)"
+S="${WORKDIR}/Inter"
 
 DEPEND="app-arch/unzip"
 RDEPEND=""
