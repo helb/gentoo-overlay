@@ -14,12 +14,11 @@ else
 	pidfile="/run/kresd_${SVCNAME#*.}.pid"
 fi
 
-# Note: Do not change --forks=1, it's buggy.
 # You can run multiples instances by creating a
 # symbolic link from kresd to kresd.foo in /etc/init.d.
 
 command="/usr/sbin/kresd"
-command_args="--quiet --forks=1 --config=$config $cachedir"
+command_args="--quiet --noninteractive --config=$config $cachedir"
 command_background="yes"
 required_files="$config"
 start_stop_daemon_args="
