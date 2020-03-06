@@ -14,8 +14,8 @@ KEYWORDS="~amd64"
 IUSE="systemd utils dnstap"
 
 RDEPEND="
-	acct-group/knot
-	acct-user/knot
+	acct-group/knot-resolver
+	acct-user/knot-resolver
 	>=net-dns/knot-2.8
 	>=dev-libs/libuv-1.7.0
 	dev-libs/jansson
