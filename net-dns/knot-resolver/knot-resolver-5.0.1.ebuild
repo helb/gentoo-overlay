@@ -1,10 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=7
 
-inherit eutils meson user
+inherit eutils meson
 
 DESCRIPTION="A caching full DNS resolver implementation written in C and LuaJIT"
 HOMEPAGE="https://www.knot-resolver.cz/"
@@ -15,6 +14,8 @@ KEYWORDS="~amd64"
 IUSE="systemd utils dnstap"
 
 RDEPEND="
+	acct-group/knot
+	acct-user/knot
 	>=net-dns/knot-2.8
 	>=dev-libs/libuv-1.7.0
 	dev-libs/jansson
@@ -27,21 +28,20 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	dev-util/ninja
 	>=dev-util/meson-0.46
-	virtual/pkgconfig"
+	virtual/pkgconfig
+	dnstap? (
+		dev-libs/fstrm
+		dev-libs/protobuf-c:=
+	)"
 
 src_configure() {
-        local emesonargs=(
-                -Dinstall_kresd_conf="enabled"
-                -Dsystemd_files=$(usex systemd "enabled" "disabled")
+		local emesonargs=(
+				-Dinstall_kresd_conf="enabled"
+				-Dsystemd_files=$(usex systemd "enabled" "disabled")
 				-Dutils=$(usex utils "enabled" "disabled")
 				-Ddnstap=$(usex dnstap "enabled" "disabled")
-        )
-        meson_src_configure
-}
-
-pkg_setup() {
-	enewgroup knot-resolver
-	enewuser knot-resolver -1 -1 /etc/kresd knot-resolver
+		)
+		meson_src_configure
 }
 
 src_install() {
@@ -55,7 +55,7 @@ src_install() {
 	newinitd "${FILESDIR}"/kres-cache-gc.initd kres-cache-gc
 
 	# systemd files are installed by knot-resolver if the flag is enabled
-	
+
 	# logrotate
 	insinto /etc/logrotate.d
 	newins "${FILESDIR}"/kresd.logrotate kresd
