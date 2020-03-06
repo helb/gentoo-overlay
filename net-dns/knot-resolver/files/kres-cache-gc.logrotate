@@ -1,0 +1,7 @@
+/var/log/kres-cache-gc.log {
+	notifempty
+	missingok
+	postrotate
+		/etc/init.d/kres-cache-gc --quiet --ifstarted restart
+	endscript
+}

@@ -1,0 +1,5 @@
+# Config file for /etc/init.d/kres-cache-gc
+
+#interval=1000
+#cachedir="/var/cache/kresd"
+#logfile="/var/log/kres-cache-gc.log"

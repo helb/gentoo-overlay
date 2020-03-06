@@ -1,0 +1,31 @@
+#!/sbin/openrc-run
+# Copyright 1999-2020 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Id$
+
+: ${cachedir:="/var/cache/kresd"}
+: ${logfile:="/var/log/kres-cache-gc.log"}
+: ${interval:="1000"}
+: ${runas_user:="knot-resolver:knot-resolver"}
+
+if [ "${SVCNAME}" = "kres-cache-gc" ]; then
+	pidfile="/run/kres-cache-gc.pid"
+else
+	pidfile="/run/kres-cache-gc_${SVCNAME#*.}.pid"
+fi
+
+command="/usr/sbin/kres-cache-gc"
+command_args="-c $cachedir -d $interval"
+command_background="yes"
+start_stop_daemon_args="
+	--chdir=$cachedir
+	--stdout=$logfile
+	--stderr=$logfile"
+
+depend() {
+	need kresd
+}
+
+start_pre() {
+	checkpath -d -m 750 -o "${runas_user}" "$cachedir"
+}
