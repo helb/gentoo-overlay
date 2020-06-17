@@ -18,10 +18,7 @@ RDEPEND="
 	acct-user/knot-resolver
 	>=net-dns/knot-2.8
 	>=dev-libs/libuv-1.7.0
-	dev-libs/jansson
 	dev-lang/luajit:2
-	dev-lua/luasocket
-	dev-lua/luasec
 	dev-db/lmdb
 	net-libs/gnutls"
 
