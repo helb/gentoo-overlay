@@ -65,5 +65,7 @@ src_install() {
 	insinto /etc/security/limits.d
 	newins "${FILESDIR}"/50-"${PN}".conf 50-"${PN}".conf
 
-	fowners knot-resolver:knot-resolver /etc/"${PN}"/
+	# conf dir permissions
+	fowners -R knot-resolver:knot-resolver /etc/"${PN}"/
+	fperms -R 0750 /etc/"${PN}"/
 }
