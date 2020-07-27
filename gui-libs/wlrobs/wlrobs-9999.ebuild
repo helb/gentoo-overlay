@@ -11,7 +11,7 @@ EHG_REPO_URI="https://hg.sr.ht/~scoopta/wlrobs"
 
 LICENSE="GPL3"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND="media-video/obs-studio"
