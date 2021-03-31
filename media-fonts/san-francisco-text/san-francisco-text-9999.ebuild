@@ -14,10 +14,7 @@ SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-fbsd"
 
 FONT_SUFFIX="ttf"
+S="${S}/Text Face (alternate)"
+FONT_S=("${S}")
 FONTDIR="/usr/share/fonts/${PN}"
-FONT_S="${S}/text-face"
-
-src_prepare() {
-	mv "${S}/Text Face (alternate)" "${S}/text-face"
-}
 
