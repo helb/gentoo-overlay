@@ -14,6 +14,6 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
 
-DEPEND="media-video/obs-studio"
+DEPEND="=media-video/obs-studio-9999"
 RDEPEND="${DEPEND}"
 BDEPEND=""
