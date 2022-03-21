@@ -16,7 +16,7 @@ IUSE="systemd utils dnstap"
 RDEPEND="
 	acct-group/knot-resolver
 	acct-user/knot-resolver
-	>=net-dns/knot-2.9
+	>=net-dns/knot-3.0.2
 	>=dev-libs/libuv-1.7.0
 	dev-lang/luajit:2
 	dev-db/lmdb
