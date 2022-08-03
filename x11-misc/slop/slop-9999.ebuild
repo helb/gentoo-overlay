@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
+EAPI=8
 
-inherit cmake-utils git-r3
+inherit cmake git-r3
 
 DESCRIPTION="Tool that ueries for a selection from the user"
 HOMEPAGE="https://github.com/naelstrof/slop"
