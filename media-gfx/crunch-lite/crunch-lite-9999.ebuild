@@ -1,7 +1,7 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit git-r3
 
@@ -15,7 +15,7 @@ KEYWORDS="~*"
 IUSE=""
 
 DEPEND="media-gfx/pngquant
-	    || ( app-arch/zopfli-chrissimpkins app-arch/zopfli )"
+		|| ( app-arch/zopfli-chrissimpkins app-arch/zopfli )"
 RDEPEND="${DEPEND}"
 
 src_install() {
