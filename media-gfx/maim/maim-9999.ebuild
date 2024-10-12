@@ -23,3 +23,8 @@ DEPEND="
 	x11-libs/libXfixes
 	>=x11-misc/slop-5.3.37"
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	sed -i 's#CXX_STANDARD 11#CXX_STANDARD 17#' CMakeLists.txt || die
+	cmake_src_prepare
+}
